@@ -1,0 +1,19 @@
+tools
+build
+
+# Cache objects
+iso/
+packer_cache/
+
+/.vscode/
+
+# Crash log
+crash.log
+
+# For built boxes
+*.box
+*.vhdx
+*.vmcx
+*.vmgs
+*.VMRS
+box.xml
