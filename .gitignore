@@ -17,3 +17,5 @@ crash.log
 *.vmgs
 *.VMRS
 box.xml
+
+*.iso

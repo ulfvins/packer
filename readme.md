@@ -6,16 +6,14 @@ This repository contains a Windows 10 template that can be used to create a Hype
 Vagrant using Packer ([Website](https://www.packer.io))
 ([Github](https://github.com/mitchellh/packer)).
 
-This repo is a using some components from these repositories:
-[joefitzgerald/packer-windows](https://github.com/joefitzgerald/packer-windows)
-repo.
-
-[StefanScherer/packer-windows](https://github.com/StefanScherer/packer-windows)
-repo.
+This repository is a using some components from these repositories:
+* [joefitzgerald](https://github.com/joefitzgerald/packer-windows)
+* [StefanScherer](https://github.com/StefanScherer/packer-windows)
+* [Bento](https://github.com/chef/bento)
 
 ### Packer Version
 
-[Packer](https://github.com/mitchellh/packer/blob/master/CHANGELOG.md) `1.6.0` is recommended.
+[Packer](https://github.com/mitchellh/packer/blob/master/CHANGELOG.md) `1.6+` is recommended.
 
 ### Product Keys
 
@@ -45,7 +43,7 @@ packer build -var 'iso_url=./custom10.iso' .\w10e.json
 
 ### Windows Updates
 
-The scripts in this repo will install all Windows updates – by default – during
+The scripts in this repo will install all Windows updates ï¿½ by default ï¿½ during
 Windows Setup. This is a _very_ time consuming process, depending on the age of
 the OS and the quantity of updates released since the last service pack. You
 might want to do yourself a favor during development and disable this
@@ -115,3 +113,10 @@ hyperv-iso output will be in this color.
 * Secondary Dvd image does not exist: CreateFile ./iso/windows_server_insider_unattend.iso: The system cannot find the file specified.
 ```
 
+## Related projects
+
+A huge thank you to these related projects from which I taken inspiration and often used as a source for inspiration and some code.
+
+* [joefitzgerald](https://github.com/joefitzgerald/packer-windows)
+* [StefanScherer](https://github.com/StefanScherer/packer-windows)
+* [Bento](https://github.com/chef/bento)

@@ -4,31 +4,45 @@
     "cpus": "2",
     "disk_size": "61440",
     "headless": "true",
-    "iso_checksum": "56ab095075be28a90bc0b510835280975c6bb2ce",
+    "iso_url": "https://software-download.microsoft.com/download/pr/19041.264.200511-0456.vb_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
+    "iso_checksum": "F57E034095E0423FEB575CA82855F73E39FFA713",
     "iso_checksum_type": "sha1",
-    "iso_url": "http://download.microsoft.com/download/C/3/9/C399EEA8-135D-4207-92C9-6AAB3259F6EF/10240.16384.150709-1700.TH1_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO",
     "memory_size": "2048",
-    "vm_name": "packer-w10"
+    "vm_name": "packer-w10",
+    "cd_files": "{{template_dir}}/answer_files/10/Autounattend.xml"
   },
   "builders": [
     {
+      "boot_command": [
+        "aaaaaaa"
+      ],
+
       "type": "hyperv-iso",
       "vm_name": "{{user `vm_name`}}",
 
       "boot_wait": "2m",
+      "enable_secure_boot": false,
+      "generation": "1",
 
-      "disk_size": "{{user `disk_size`}}",
-      "cpus": "{{user `cpus`}}",
-      "memory": "{{user `memory_size`}}",
-      
+      "switch_name": "Default Switch",
+
       "floppy_files": [
         "{{user `autounattend`}}",
         "./scripts/fixnetwork.ps1",
         "./scripts/disable-winrm.ps1",
         "./scripts/enable-winrm.ps1",
         "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1"
+        "./scripts/win-updates.ps1",
+        "./scripts/chocolatey.bat",
+        "./scripts/chocopacks.bat"
       ],
+
+      "disk_size": "{{user `disk_size`}}",
+      "cpus": "{{user `cpus`}}",
+      "memory": "{{user `memory_size`}}",
+
+      "shutdown_timeout": "15m",
+      "skip_export": false,
       
       "headless": "{{user `headless`}}",
       
@@ -38,7 +52,7 @@
       "communicator": "winrm",
       "winrm_username": "vagrant",
       "winrm_password": "vagrant",
-      "winrm_timeout": "30m",
+      "winrm_timeout": "12h",
       "winrm_insecure": true,
 
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\""
