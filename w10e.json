@@ -13,16 +13,10 @@
   },
   "builders": [
     {
-      "boot_command": [
-        "aaaaaaa"
-      ],
-
       "type": "hyperv-iso",
       "vm_name": "{{user `vm_name`}}",
 
       "boot_wait": "2m",
-      "enable_secure_boot": false,
-      "generation": "1",
 
       "switch_name": "Default Switch",
 
