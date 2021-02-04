@@ -1,13 +1,9 @@
 # This builds the unattend ISOs needed for Generation 2 VMs with Hyper-V
-
-
 $isoList = @(
     @{
-        FileName="./iso/windows_10_insider_unattend.iso";
+        FileName="./iso/windows_10_unattend.iso";
         Files=@(
-            "./answer_files/10_insider_uefi/Autounattend.xml"
-            "./floppy/WindowsPowershell.lnk",
-            "./floppy/PinTo10.exe",
+            "./answer_files/10/uefi/Autounattend.xml"
             "./scripts/fixnetwork.ps1",
             "./scripts/disable-screensaver.ps1",
             "./scripts/disable-winrm.ps1",
