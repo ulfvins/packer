@@ -6,4 +6,28 @@
 #       windows_10.json
 
 # bigger disk for hyperv
-packer build w10e.json
+Param(
+    [ValidateSet("Default","Gen2")]
+    $imageType = "Default",
+
+    [ValidateSet("Base","Backoffice","Development")]
+    $Role = "Base"
+)
+
+function Cleanup-Artifacts {
+
+    If(Test-Path .\build){
+
+    }
+}
+
+
+# TODO: Create a packer.json file dynamically in the build folder...
+# TODO: If we have a Gen2 Hyper-V machine, create a ISO with files
+
+if($image -eq "Gen2"){
+    packer build w10e-uefi.json -force
+}
+else {
+    packer build w10e.json -force
+}
