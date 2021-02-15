@@ -1,3 +1,42 @@
+﻿function Create-TSOSDPackerTemplate {
+
+    param(
+        $Builder         = "hyperv-iso",
+        $ComputerName    = "Windows10",
+        $ISOFileUrl      = "https://software-download.microsoft.com/download/pr/19041.264.200511-0456.vb_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
+        $ISOFileChecksum = 'sha1:F57E034095E0423FEB575CA82855F73E39FFA713'
+    )
+
+$template = @"
+{
+  "builders": [
+    {
+      "type": "hyperv-iso",
+      "boot_command": ["<enter>"],
+      "boot_wait": "1s",
+      "communicator": "winrm",
+      "cpus": 2,
+      "disk_size": "61440",
+      "enable_secure_boot": true,
+      "enable_virtualization_extensions": true,
+      "generation": 2,
+      "guest_additions_mode": "disable",
+      "iso_checksum": "$ISOFileChecksum",
+      "iso_url": "$ISOFileUrl",
+      "memory": "4096",
+      "secondary_iso_images": ["./build/unattend.iso"],
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "switch_name": "Default Switch",
+      "vm_name": "$ComputerName",
+      "winrm_password": "vagrant",
+      "winrm_timeout": "2h",
+      "winrm_username": "vagrant"
+    }
+  ]
+}
+"@
+
+$templateVBox = @"
 {
   "variables": {
     "autounattend": "./answer_files/10/Autounattend.xml",
@@ -53,4 +92,10 @@
     }
   ]
 }
+"@
 
+    $Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding $False
+    [System.IO.File]::WriteAllLines("$global:ExecutionPath\build\template.json", $template, $Utf8NoBomEncoding)
+
+    &packer validate "$global:ExecutionPath\build\template.json"
+}
