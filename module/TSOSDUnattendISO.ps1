@@ -14,6 +14,7 @@
 
 ($options = new-object System.CodeDom.Compiler.CompilerParameters).CompilerOptions = '/unsafe'
 
+# NOTE: This code only runs on PowerShell 3-5, not Core+
 Add-Type -CompilerParameters $options -TypeDefinition @'
 public class ISOFile
 {
