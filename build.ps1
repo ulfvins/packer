@@ -1,4 +1,3 @@
-Write-Host "Execution path set to: $global:ExecutionPath" -ForegroundColor Green
 #TODO: Start timer, build time...
 
 Import-Module .\module\tsp -Verbose -Force

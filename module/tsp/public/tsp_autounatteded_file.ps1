@@ -251,7 +251,7 @@ $autounattend = @"
     <cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="catalog:d:/sources/install_windows 7 ENTERPRISE.clg"/>
 </unattend>
 "@    
-    $autounattend | Out-File -FilePath "$script:ExecutionPath\build\Autounattend.xml" -Encoding utf8 -Force -ErrorAction SilentlyContinue
+    $autounattend | Out-File -FilePath "$script:ExecutionPath\build\Autounattend.xml" -Encoding utf8 -Force
 }
 
 Export-ModuleMember "New-TSPAutounattededFile"
