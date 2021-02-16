@@ -1,5 +1,6 @@
-﻿function Create-TSOSDAutounattededFile {
+﻿function New-TSPAutounattededFile {
 
+    [cmdletbinding()]
     param(
         $ComputerName = "Windows10",
         $InputLocale  = "sv-SE",
@@ -7,6 +8,9 @@
         $UserLocale   = "sv-SE",
         $TimeZone     = ""
     )
+
+    $fn = "[$($MyInvocation.MyCommand)]"
+    Write-Verbose -Message $fn
 
 $autounattend = @"
 <?xml version="1.0" encoding="utf-8"?>
@@ -247,5 +251,7 @@ $autounattend = @"
     <cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="catalog:d:/sources/install_windows 7 ENTERPRISE.clg"/>
 </unattend>
 "@    
-    $autounattend | Out-File -FilePath "$global:ExecutionPath\build\Autounattend.xml" -Encoding utf8 -Force -ErrorAction SilentlyContinue
+    $autounattend | Out-File -FilePath "$script:ExecutionPath\build\Autounattend.xml" -Encoding utf8 -Force -ErrorAction SilentlyContinue
 }
+
+Export-ModuleMember "New-TSPAutounattededFile"

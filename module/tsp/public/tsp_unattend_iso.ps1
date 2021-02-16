@@ -1,16 +1,20 @@
-﻿function Create-TSOSDUnattendISO {
+﻿function New-TSPUnattendISO {
 
+    [cmdletbinding()]
     Param(
         $Source = @(
-            "$global:ExecutionPath\build\Autounattend.xml"
-            "$global:ExecutionPath\scripts\fixnetwork.ps1",
-            "$global:ExecutionPath\scripts\disable-screensaver.ps1",
-            "$global:ExecutionPath\scripts\disable-winrm.ps1",
-            "$global:ExecutionPath\scripts\enable-winrm.ps1",
-            "$global:ExecutionPath\scripts\microsoft-updates.bat",
-            "$global:ExecutionPath\scripts\win-updates.ps1"
+            "$script:ExecutionPath\build\Autounattend.xml"
+            "$script:ExecutionPath\scripts\fixnetwork.ps1",
+            "$script:ExecutionPath\scripts\disable-screensaver.ps1",
+            "$script:ExecutionPath\scripts\disable-winrm.ps1",
+            "$script:ExecutionPath\scripts\enable-winrm.ps1",
+            "$script:ExecutionPath\scripts\microsoft-updates.bat",
+            "$script:ExecutionPath\scripts\win-updates.ps1"
         )
     )
+
+    $fn = "[$($MyInvocation.MyCommand)]"
+    Write-Verbose -Message $fn
 
 ($options = new-object System.CodeDom.Compiler.CompilerParameters).CompilerOptions = '/unsafe'
 
@@ -55,7 +59,9 @@ public class ISOFile
     }
 
     $Result = $Image.CreateResultImage()
-    $Target = New-Item -Path "$global:ExecutionPath\build\unattend.iso" -ItemType File -Force:$Force -ErrorAction SilentlyContinue
+    $Target = New-Item -Path "$script:ExecutionPath\build\unattend.iso" -ItemType File -Force:$Force -ErrorAction SilentlyContinue
     [ISOFile]::Create($Target.FullName,$Result.ImageStream,$Result.BlockSize,$Result.TotalBlocks)
 
 }
+
+Export-ModuleMember -Function "New-TSPUnattendISO"

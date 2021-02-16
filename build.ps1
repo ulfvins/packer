@@ -1,14 +1,17 @@
-. .\module\TSOSDArtifacts.ps1
-. .\module\TSOSDPackerTemplate.ps1 -Force
-. .\module\TSOSDUnattendISO.ps1
-. .\module\TSOSDAutounattededFile.ps1
+Write-Host "Execution path set to: $global:ExecutionPath" -ForegroundColor Green
+#TODO: Start timer, build time...
 
-$global:ExecutionPath = $PSScriptRoot
+Import-Module .\module\tsp -Verbose -Force
+Set-TSPExecutionPath -ExecutionPath $PSScriptRoot -Verbose
 
 # MAIN
-Cleanup-TSOSDArtifacts
-Create-TSOSDAutounattededFile
-Create-TSOSDUnattendISO
-Create-TSOSDPackerTemplate
+# TODO: Ensure-TSOSDPacker...
+Remove-TSPArtifacts -Verbose
+
+New-TSPAutounattededFile -Verbose
+New-TSPUnattendISO -Verbose
+New-TSPPackerTemplate -Verbose
 
 &packer build "$global:ExecutionPath\build\template.json"
+
+Write-Host "Complete!" -ForegroundColor Green

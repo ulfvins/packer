@@ -1,11 +1,15 @@
-﻿function Create-TSOSDPackerTemplate {
+﻿function New-TSPPackerTemplate {
 
+    [cmdletbinding()]
     param(
         $Builder         = "hyperv-iso",
         $ComputerName    = "Windows10",
         $ISOFileUrl      = "https://software-download.microsoft.com/download/pr/19041.264.200511-0456.vb_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso",
         $ISOFileChecksum = 'sha1:F57E034095E0423FEB575CA82855F73E39FFA713'
     )
+
+    $fn = "[$($MyInvocation.MyCommand)]"
+    Write-Verbose -Message $fn
 
 $template = @"
 {
@@ -95,7 +99,9 @@ $templateVBox = @"
 "@
 
     $Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding $False
-    [System.IO.File]::WriteAllLines("$global:ExecutionPath\build\template.json", $template, $Utf8NoBomEncoding)
+    [System.IO.File]::WriteAllLines("$script:ExecutionPath\build\template.json", $template, $Utf8NoBomEncoding)
 
-    &packer validate "$global:ExecutionPath\build\template.json"
+    &packer validate "$script:ExecutionPath\build\template.json"
 }
+
+Export-ModuleMember -Function "New-TSPPackerTemplate"
