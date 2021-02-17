@@ -17,7 +17,7 @@ $template = @"
     {
       "type": "hyperv-iso",
       "boot_command": ["<enter>"],
-      "boot_wait": "1s",
+      "boot_wait": "1ms",
       "communicator": "winrm",
       "cpus": 2,
       "disk_size": "61440",
@@ -36,7 +36,14 @@ $template = @"
       "winrm_timeout": "2h",
       "winrm_username": "vagrant"
     }
-  ]
+  ],
+  "provisioners": [{
+    "type": "powershell",
+    "scripts": [
+      "scripts/test-1.ps1",
+      "scripts/test-2.ps1"
+    ]
+  }]
 }
 "@
 
