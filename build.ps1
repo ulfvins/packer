@@ -11,6 +11,6 @@ New-TSPAutounattededFile -Verbose
 New-TSPUnattendISO -Verbose
 New-TSPPackerTemplate -Verbose
 
-&packer build "$global:ExecutionPath\build\template.json"
+&packer build "$PSScriptRoot\build\template.json"
 
 Write-Host "Complete!" -ForegroundColor Green

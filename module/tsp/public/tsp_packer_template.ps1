@@ -41,7 +41,8 @@ $template = @"
     "type": "powershell",
     "scripts": [
       "scripts/test-1.ps1",
-      "scripts/test-2.ps1"
+      "scripts/test-2.ps1",
+      "scripts/install-programs.ps1"
     ]
   }]
 }

@@ -2,11 +2,11 @@
 
     [cmdletbinding()]
     param(
-        $ComputerName = "Windows10",
-        $InputLocale  = "sv-SE",
-        $SystemLocale = "sv-SE",
-        $UserLocale   = "sv-SE",
-        $TimeZone     = ""
+        [string]$ComputerName = "Windows10",
+        [string]$InputLocale  = "sv-SE",
+        [string]$SystemLocale = "sv-SE",
+        [string]$UserLocale   = "sv-SE",
+        [string]$TimeZone     = "W. Europe Standard Time"
     )
 
     $fn = "[$($MyInvocation.MyCommand)]"
