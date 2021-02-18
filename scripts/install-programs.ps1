@@ -87,17 +87,24 @@ $Packages = @(
     "7zip.install",
     "cmder",
     "microsoft-windows-terminal",
+    "drawio",
     "keepass",
 
     #Web Tools
     "googlechrome",
     "firefox",
     "fiddler",
+    "postman",
 
     #Developer Tools
     "git.install",
-    "nodejs.install",
-    "visualstudiocode"
+    "nodejs-lts",
+    "visualstudiocode",
+    "snyk",
+
+    #Other
+    "zoomit",
+    "zap"
 )
 
 ForEach ($Package In $Packages)
